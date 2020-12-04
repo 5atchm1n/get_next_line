@@ -6,9 +6,10 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:38 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/04 19:29:14 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/04 21:21:15 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "get_next_line.h"
 
 size_t		ft_strlen(const char *s)
 {

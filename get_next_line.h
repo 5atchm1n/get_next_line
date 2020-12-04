@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:18 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/04 02:44:37 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/04 13:41:53 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 typedef struct		s_list
 {
-	char			*sbuffer;
+	char			*buff;
 	size_t			ifd;
 	struct s_list	*head;
 	struct s_list	*next;

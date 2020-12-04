@@ -6,9 +6,21 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:38 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/04 15:36:47 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/04 19:29:14 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+size_t		ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
 
 char		*ft_strjoin(char const *s1, char const *s2)
 {
@@ -37,7 +49,6 @@ char		*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-
 char		*ft_strdup(const char *src)
 {
 	size_t	i;
@@ -55,7 +66,7 @@ char		*ft_strdup(const char *src)
 	return (dup);
 }
 
-char	*ft_strchr(const char *str, int c)
+char		*ft_strchr(const char *str, int c)
 {
 	while (*str)
 	{
@@ -66,4 +77,28 @@ char	*ft_strchr(const char *str, int c)
 	if (c == '\0')
 		return ((char *)str);
 	return (NULL);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char		*sub;
+	size_t		i;
+
+	if (!s)
+		return (NULL);
+	if (ft_strlen(s) < start)
+		return (ft_strdup(""));
+	if (ft_strlen(s) < start + len)
+		len = ft_strlen(s) - start;
+	if (!(sub = malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	i = 0;
+	while (len > 0 && *(s + start) != '\0')
+	{
+		sub[i] = s[i + start];
+		i++;
+		len--;
+	}
+	sub[i] = '\0';
+	return (sub);
 }

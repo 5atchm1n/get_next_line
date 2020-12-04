@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:18 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/04 13:41:53 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/04 15:39:16 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,19 @@ typedef struct		s_list
 
 
 int					get_next_line(int fd, char **line);
-char				*ft_strjoin(char const *s1, char const *s2)
-char				*ft_strdup(const char *src)
+char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strdup(const char *src);
+char				*ft_strchr(const char *str, int c);
+{
+	while (*str)
+	{
+		if (*str == (unsigned char)c)
+			return ((char *)str);
+		str++;
+	}
+	if (c == '\0')
+		return ((char *)str);
+	return (NULL);
+}
 
 #endif

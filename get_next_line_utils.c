@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:38 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/04 02:44:35 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/04 15:36:47 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,17 @@ char		*ft_strdup(const char *src)
 	}
 	dup[i] = '\0';
 	return (dup);
+}
+
+char	*ft_strchr(const char *str, int c)
+{
+	while (*str)
+	{
+		if (*str == (unsigned char)c)
+			return ((char *)str);
+		str++;
+	}
+	if (c == '\0')
+		return ((char *)str);
+	return (NULL);
 }

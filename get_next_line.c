@@ -6,18 +6,40 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:24 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/04 13:51:59 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/04 15:34:49 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-ft_set_head(t_list data, int fd)
-{
 //checks if head exists and sets it
-}
-
-ft_get_head(t_list data, int fd)
+static t_list	*ft_set_head(t_list *data, int fd)
 {
-//finds the correct node
+	if (data = NULL)
+	{
+		data = malloc(sizeof(t_list));
+		data->ifd = fd;
+		data->buff = strdup("");
+		data->head = data;
+		data->next = NULL;
+	}
+	data = data->head;
+	return(data)
+}
+//finds the correct node to work on
+static t_list	*ft_get_data(t_list data, int fd)
+{
+	while (data->next != NULL)
+	{
+		if (data->ifd == fd)
+			return(data);
+		data = data->next;
+	if (data->ifd == fd)
+		return (data);
+	data->next = malloc(sizeof(t_list));
+	data->next->ifd = fd;
+	data->next->buff = ft_strdup("");
+	data->next->head = data->head;
+	data->next->next = NULL;
+	return (data->next);
 }
 
 ft_set_line(char *str, char **list)
@@ -32,11 +54,11 @@ int					get_next_line(int fd, char **line)
 {
 	static t_list	*data;
 	char			buffer[BUFFER_SIZE + 1];
-	char			*temp;
+	char			*tmp;
 	int				n;
 
 	data = ft_set_head(data, fd);
-	data = ft_get_fd(data, fd);
+	data = ft_get_data(data, fd);
 	if ((read(fd, buffer, 0) < 0) || fd = 0 || !line || BUFFER_SIZE < 1)
 		return (-1);
 	if (!data->buff)

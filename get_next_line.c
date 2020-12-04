@@ -6,11 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:24 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/04 15:34:49 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/04 19:35:12 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//checks if head exists and sets it
+
+#include "get_next_next.h"
+
 static t_list	*ft_set_head(t_list *data, int fd)
 {
 	if (data = NULL)
@@ -24,7 +26,7 @@ static t_list	*ft_set_head(t_list *data, int fd)
 	data = data->head;
 	return(data)
 }
-//finds the correct node to work on
+
 static t_list	*ft_get_data(t_list data, int fd)
 {
 	while (data->next != NULL)
@@ -32,6 +34,7 @@ static t_list	*ft_get_data(t_list data, int fd)
 		if (data->ifd == fd)
 			return(data);
 		data = data->next;
+	}
 	if (data->ifd == fd)
 		return (data);
 	data->next = malloc(sizeof(t_list));
@@ -42,13 +45,26 @@ static t_list	*ft_get_data(t_list data, int fd)
 	return (data->next);
 }
 
-ft_set_line(char *str, char **list)
+static char *ft_set_line(char *str, char **list)
 {
-//copies the buff into line	
+	char			*nbuffer;
+	size_t			i;
+
+	i = 0;
+	while (str[i] != '\n' && str[i] != '\0')
+		i++;
+	if (str[i] == '\n')
+	{
+		*line = ft_strsub(str, 0, i);
+		nbuffer = ft_strdup(&str[i + 1];
+	}
+	if (str[i] == '\0')
+	{
+		*line = ft_strsub(str, 0, i);
+		nbuffer = ft_strdup("");
+	}
+	return (nbuffer);
 }
-
-
-#include "get_next_next.h"
 
 int					get_next_line(int fd, char **line)
 {
@@ -63,16 +79,16 @@ int					get_next_line(int fd, char **line)
 		return (-1);
 	if (!data->buff)
 		data->buff = ft_strdup("");
-	while ((n = read(fd, buff, BUFFSIZE)) == 1)
+	while ((n = read(fd, buffer, BUFFSIZE)) > 0)
 	{
 		buffer[n] = '\0';
-		tmp = ft_strjoin(data->buff, buff);
+		tmp = ft_strjoin(data->buff, buffer);
 		free(data->buff);
 		data->buff = tmp;
 		if (ft_strchr(data->buff, '\n')
 				break ;
 	}
-	if (rd == 0 && ft_strlen(node->s))
+	if (rd == 0 && ft_strlen(data->buff) == 0)
 		return (0);
 	tmp = ft_set_line(data->buff, line);
 	free(data->buff);

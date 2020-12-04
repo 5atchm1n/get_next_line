@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:18 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/04 15:39:16 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/04 19:20:36 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,6 @@ int					get_next_line(int fd, char **line);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strdup(const char *src);
 char				*ft_strchr(const char *str, int c);
-{
-	while (*str)
-	{
-		if (*str == (unsigned char)c)
-			return ((char *)str);
-		str++;
-	}
-	if (c == '\0')
-		return ((char *)str);
-	return (NULL);
-}
+char				*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif

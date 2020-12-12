@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:24 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/12 23:27:30 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/12 23:41:59 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int					get_next_line(int fd, char **line)
 		if (ft_strchr(data->buff, '\n'))
 			break ;
 	}
+	if (n == 0 && ft_strlen(data->buff) == 0)
+		return (0);
 	tmp = ft_set_line(data->buff, line);
 	free(data->buff);
 	data->buff = tmp;

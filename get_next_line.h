@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:18 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/04 21:20:30 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/04 21:57:18 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct		s_list
 	int				ifd;
 	struct s_list	*head;
 	struct s_list	*next;
-	
 }					t_list;
 
 int					get_next_line(int fd, char **line);

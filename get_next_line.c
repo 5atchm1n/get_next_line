@@ -6,13 +6,13 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:24 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/04 21:30:13 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/12 23:27:30 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static t_list	*ft_set_head(t_list *data, int fd)
+static t_list		*ft_set_head(t_list *data, int fd)
 {
 	if (data == NULL)
 	{
@@ -23,15 +23,15 @@ static t_list	*ft_set_head(t_list *data, int fd)
 		data->next = NULL;
 	}
 	data = data->head;
-	return(data);
+	return (data);
 }
 
-static t_list	*ft_get_data(t_list *data, int fd)
+static t_list		*ft_get_data(t_list *data, int fd)
 {
 	while (data->next != NULL)
 	{
 		if (data->ifd == fd)
-			return(data);
+			return (data);
 		data = data->next;
 	}
 	if (data->ifd == fd)
@@ -44,7 +44,7 @@ static t_list	*ft_get_data(t_list *data, int fd)
 	return (data->next);
 }
 
-static char *ft_set_line(char *str, char **line)
+static char			*ft_set_line(char *str, char **line)
 {
 	char			*nbuffer;
 	size_t			i;
@@ -85,12 +85,12 @@ int					get_next_line(int fd, char **line)
 		free(data->buff);
 		data->buff = tmp;
 		if (ft_strchr(data->buff, '\n'))
-				break ;
+			break ;
 	}
-	if (n == 0 && ft_strlen(data->buff) == 0)
-		return (0);
 	tmp = ft_set_line(data->buff, line);
 	free(data->buff);
 	data->buff = tmp;
-	return(1);
+	if (n == 0 && ft_strlen(data->buff) == 0)
+		return (0);
+	return (1);
 }

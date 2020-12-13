@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:24 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/12 23:41:59 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/13 03:06:45 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,5 @@ int					get_next_line(int fd, char **line)
 	tmp = ft_set_line(data->buff, line);
 	free(data->buff);
 	data->buff = tmp;
-	if (n == 0 && ft_strlen(data->buff) == 0)
-		return (0);
 	return (1);
 }

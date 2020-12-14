@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:24 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/13 03:19:34 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/14 00:09:23 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,6 @@ static char			*ft_set_line(char *str, char **line)
 	return (nbuffer);
 }
 
-static int			ft_return(char *str, char **line)
-{
-	int				n;
-
-	n = 0;
-	if (str[0] == '\n')
-		*line = ft_strdup("");
-	return (n);
-}
-
 int					get_next_line(int fd, char **line)
 {
 	static t_list	*data;
@@ -98,7 +88,7 @@ int					get_next_line(int fd, char **line)
 			break ;
 	}
 	if (n == 0 && ft_strlen(data->buff) == 0)
-		return (ft_return(data->buff, line));
+		return (0);
 	tmp = ft_set_line(data->buff, line);
 	free(data->buff);
 	data->buff = tmp;

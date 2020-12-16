@@ -6,11 +6,11 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:24 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/13 03:06:45 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/16 05:44:12 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static t_list		*ft_set_head(t_list *data, int fd)
 {
@@ -76,8 +76,6 @@ int					get_next_line(int fd, char **line)
 	data = ft_get_data(data, fd);
 	if ((read(fd, buffer, 0) < 0) || fd == 0 || !line || BUFFER_SIZE < 1)
 		return (-1);
-	if (!data->buff)
-		data->buff = ft_strdup("");
 	while ((n = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[n] = '\0';
@@ -87,10 +85,10 @@ int					get_next_line(int fd, char **line)
 		if (ft_strchr(data->buff, '\n'))
 			break ;
 	}
-	if (n == 0 && ft_strlen(data->buff) == 0)
-		return (0);
 	tmp = ft_set_line(data->buff, line);
 	free(data->buff);
 	data->buff = tmp;
+	if (n == 0 && ft_strlen(data->buff) == 0)
+		return (0);
 	return (1);
 }

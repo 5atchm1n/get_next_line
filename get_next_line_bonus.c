@@ -6,42 +6,38 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:24 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/17 06:00:49 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/17 17:41:51 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static t_list		*ft_set_head(t_list *data, int fd)
+static t_list		*ft_set_gnline(t_list *gnline, int fd)
 {
-	if (data == NULL)
+	if (gnline == NULL)
 	{
-		data = malloc(sizeof(t_list));
-		data->ifd = fd;
-		data->buff = ft_strdup("");
-		data->head = data;
-		data->next = NULL;
+		gnline = malloc(sizeof(t_list));
+		gnline->ifd = fd;
+		gnline->buff = ft_strdup("");
+		gnline->head = gnline;
+		gnline->next = NULL;
+		return (gnline);
 	}
-	data = data->head;
-	return (data);
-}
-
-static t_list		*ft_get_data(t_list *data, int fd)
-{
-	while (data->next != NULL)
+	gnline = gnline->head;
+	while (gnline->next != NULL)
 	{
-		if (data->ifd == fd)
-			return (data);
-		data = data->next;
+		if (gnline->ifd == fd)
+			return (gnline);
+		gnline = gnline->next;
 	}
-	if (data->ifd == fd)
-		return (data);
-	data->next = malloc(sizeof(t_list));
-	data->next->ifd = fd;
-	data->next->buff = ft_strdup("");
-	data->next->head = data->head;
-	data->next->next = NULL;
-	return (data->next);
+	if (gnline->ifd == fd)
+		return (gnline);
+	gnline->next = malloc(sizeof(t_list));
+	gnline->next->ifd = fd;
+	gnline->next->buff = ft_strdup("");
+	gnline->next->head = gnline->head;
+	gnline->next->next = NULL;
+	return (gnline->next);
 }
 
 static char			*ft_set_line(char *str, char **line)
@@ -65,44 +61,45 @@ static char			*ft_set_line(char *str, char **line)
 	return (nbuffer);
 }
 
-static int			ft_return(int n, char **data, char **line, char **tmp)
+static int			ft_return(int n, char **buff, char **line, char **tmp)
 {
 	if (!tmp)
 		return (-1);
-	if (n == 0 && ft_strlen(*data) == 0)
+	if (n == 0 && ft_strlen(*buff) == 0)
 	{
-		*line = NULL;
+		*line = ft_strdup("");
 		return (0);
 	}
-	*tmp = ft_set_line(*data, line);
-	free(*data);
-	*data = *tmp;
-	if (!data)
+	*tmp = ft_set_line(*buff, line);
+	free(*buff);
+	*buff = *tmp;
+	if (!buff)
 		return (-1);
 	return (1);
 }
 
 int					get_next_line(int fd, char **line)
 {
-	static t_list	*data;
+	static t_list	*gnline;
 	char			buffer[BUFFER_SIZE + 1];
 	char			*tmp;
 	int				n;
 
-	data = ft_set_head(data, fd);
-	data = ft_get_data(data, fd);
+	gnline = ft_set_gnline(gnline, fd);
 	if ((read(fd, buffer, 0) < 0) || fd == 0 || !line || BUFFER_SIZE < 1
-	|| !data)
+	|| !gnline)
 		return (-1);
 	while ((n = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[n] = '\0';
-		tmp = ft_strjoin(data->buff, buffer);
-		free(data->buff);
-		data->buff = tmp;
-		if (ft_strchr(data->buff, '\n'))
+		tmp = ft_strjoin(gnline->buff, buffer);
+		free(gnline->buff);
+		gnline->buff = tmp;
+		if (!tmp)
+			return (-1);
+		if (ft_strchr(gnline->buff, '\n'))
 			break ;
 	}
-	n = ft_return(n, &data->buff, line, &tmp);
+	n = ft_return(n, &gnline->buff, line, &tmp);
 	return (n);
 }

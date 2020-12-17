@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:24 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/17 03:52:11 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/17 06:00:49 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ static int			ft_return(int n, char **data, char **line, char **tmp)
 		return (-1);
 	if (n == 0 && ft_strlen(*data) == 0)
 	{
-		if(!(*line = ft_strdup("")))
-			return (-1);
+		*line = NULL;
 		return (0);
 	}
 	*tmp = ft_set_line(*data, line);
@@ -92,7 +91,7 @@ int					get_next_line(int fd, char **line)
 
 	data = ft_set_head(data, fd);
 	data = ft_get_data(data, fd);
-	if ((read(fd, buffer, 0) < 0) || fd == 0 || !line || BUFFER_SIZE < 1 
+	if ((read(fd, buffer, 0) < 0) || fd == 0 || !line || BUFFER_SIZE < 1
 	|| !data)
 		return (-1);
 	while ((n = read(fd, buffer, BUFFER_SIZE)) > 0)

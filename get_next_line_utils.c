@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:38 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/17 16:20:32 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/23 05:45:43 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,3 +106,25 @@ char		*ft_substr(char const *s, unsigned int start, size_t len)
 	sub[i] = '\0';
 	return (sub);
 }
+
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	size_t			i;
+	unsigned char	*new_src;
+	unsigned char	*new_dest;
+
+	if (!dest && !src)
+		return (NULL);
+	new_src = (unsigned char *)src;
+	new_dest = (unsigned char *)dest;
+	i = 0;
+	while (i < n)
+	{
+		*new_dest = *new_src;
+		new_dest++;
+		new_src++;
+		i++;
+	}
+	return (dest);
+}
+

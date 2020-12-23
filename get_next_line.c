@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:24 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/17 19:08:25 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/23 01:57:13 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ static char			*ft_set_line(char *str, char **line)
 	i = 0;
 	while (str[i] != '\n' && str[i] != '\0')
 		i++;
+	if (str[0] == '\0')
+	{
+		*line = NULL;
+		nbuffer = ft_strdup("");
+		return (nbuffer);
+	}
 	if (str[i] == '\n')
 	{
 		*line = ft_substr(str, 0, i);
@@ -69,20 +75,17 @@ static char			*ft_set_line(char *str, char **line)
 	return (nbuffer);
 }
 
-static int			ft_return(int n, char **buff, char **line, char **tmp)
+static int			ft_return(int n, t_list *data, char **line, char **tmp)
 {
-	if (n == 0 && ft_strlen(*buff) == 0)
-	{
-		*line = ft_strdup("");
-		if (!line)
-			return (-1);
-		return (0);
-	}
-	*tmp = ft_set_line(*buff, line);
-	free(*buff);
-	*buff = *tmp;
-	if (!buff)
+	if (!tmp)
 		return (-1);
+	*tmp = ft_set_line(data->buff, line);
+	free(data->buff);
+	data->buff = *tmp;
+	if (data->buff == NULL)
+		return (-1);
+	if (n == 0 && ft_strlen(data->buff) == 0)
+		return (0);
 	return (1);
 }
 
@@ -109,6 +112,6 @@ int					get_next_line(int fd, char **line)
 		if (ft_strchr(gnline->buff, '\n'))
 			break ;
 	}
-	n = ft_return(n, &gnline->buff, line, &tmp);
+	n = ft_return(n, gnline, line, &tmp);
 	return (n);
 }

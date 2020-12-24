@@ -6,11 +6,11 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:38 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/24 07:09:43 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/24 07:08:25 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t		gnl_len(const char *s)
 {

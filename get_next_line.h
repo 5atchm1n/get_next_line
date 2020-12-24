@@ -6,29 +6,27 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:18 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/04 21:57:18 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/24 06:46:29 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 128
+# endif
+
 # include <unistd.h>
 # include <stdlib.h>
-
-typedef struct		s_list
-{
-	char			*buff;
-	int				ifd;
-	struct s_list	*head;
-	struct s_list	*next;
-}					t_list;
+# include <stdio.h>
 
 int					get_next_line(int fd, char **line);
-char				*ft_strjoin(char const *s1, char const *s2);
-char				*ft_strdup(const char *src);
-char				*ft_strchr(const char *str, int c);
-char				*ft_substr(char const *s, unsigned int start, size_t len);
-size_t				ft_strlen(const char *s);
+char				*gnl_join(char *s1, char *s2);
+int					gnl_find(char *str);
+char				*gnl_sub(const char *s, unsigned int start, size_t len,
+							int n);
+size_t				gnl_len(const char *s);
+char				*gnl_dup(const char *src, const char *srcfree);
 
 #endif

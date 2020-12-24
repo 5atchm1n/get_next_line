@@ -6,38 +6,69 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:38 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/23 05:45:43 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/24 04:02:01 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t		ft_strlen(const char *s)
+size_t		gnl_len(const char *s)
 {
 	size_t	i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (s && s[i] != '\0')
 	{
 		i++;
 	}
 	return (i);
 }
 
-char		*ft_strjoin(char const *s1, char const *s2)
+int			gnl_find(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str && str[i])
+	{
+		if (str[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+char		*gnl_dup(const char *src, const char *srcfree)
+{
+	size_t	i;
+	char	*dup;
+
+	i = 0;
+	if (!(dup = malloc(sizeof(char) * (gnl_len(src) + 1))))
+		return (NULL);
+	while (src && src[i] != '\0')
+	{
+		dup[i] = src[i];
+		i++;
+	}
+	dup[i] = '\0';
+	if (srcfree)
+		free((char *)srcfree);
+	return (dup);
+}
+
+char		*gnl_join(char *s1, char *s2)
 {
 	char	*str;
 	size_t	len;
 	size_t	i;
 	size_t	j;
 
-	if (!s1 || !s2)
-		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2);
+	len = gnl_len(s1) + gnl_len(s2);
 	if (!(str = malloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	i = 0;
-	while (s1[i] != '\0')
+	while (s1 && s1[i] != '\0')
 	{
 		str[i] = s1[i];
 		i++;
@@ -50,50 +81,20 @@ char		*ft_strjoin(char const *s1, char const *s2)
 		j++;
 	}
 	str[i] = '\0';
+	if (s1)
+		free(s1);
 	return (str);
 }
 
-char		*ft_strdup(const char *src)
-{
-	size_t	i;
-	char	*dup;
-
-	i = 0;
-	if (!(dup = malloc(sizeof(char) * (ft_strlen(src) + 1))))
-		return (NULL);
-	while (src[i] != '\0')
-	{
-		dup[i] = src[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
-}
-
-char		*ft_strchr(const char *str, int c)
-{
-	while (*str)
-	{
-		if (*str == (unsigned char)c)
-			return ((char *)str);
-		str++;
-	}
-	if (c == '\0')
-		return ((char *)str);
-	return (NULL);
-}
-
-char		*ft_substr(char const *s, unsigned int start, size_t len)
+char		*gnl_sub(const char *s, unsigned int start, size_t len, int n)
 {
 	char	*sub;
 	size_t	i;
 
 	if (!s)
 		return (NULL);
-	if (ft_strlen(s) < start)
-		return (ft_strdup(""));
-	if (ft_strlen(s) < start + len)
-		len = ft_strlen(s) - start;
+	if (gnl_len(s) < start + len)
+		len = gnl_len(s) - start;
 	if (!(sub = malloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	i = 0;
@@ -104,27 +105,7 @@ char		*ft_substr(char const *s, unsigned int start, size_t len)
 		len--;
 	}
 	sub[i] = '\0';
+	if (n == 1)
+		free((char *)s);
 	return (sub);
 }
-
-void	*ft_memcpy(void *dest, const void *src, size_t n)
-{
-	size_t			i;
-	unsigned char	*new_src;
-	unsigned char	*new_dest;
-
-	if (!dest && !src)
-		return (NULL);
-	new_src = (unsigned char *)src;
-	new_dest = (unsigned char *)dest;
-	i = 0;
-	while (i < n)
-	{
-		*new_dest = *new_src;
-		new_dest++;
-		new_src++;
-		i++;
-	}
-	return (dest);
-}
-

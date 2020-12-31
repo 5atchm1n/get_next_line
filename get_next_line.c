@@ -6,7 +6,7 @@
 /*   By: sshakya <sshakya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:17:24 by sshakya           #+#    #+#             */
-/*   Updated: 2020/12/24 06:38:32 by sshakya          ###   ########.fr       */
+/*   Updated: 2020/12/30 22:21:40 by sshakya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int					get_next_line(int fd, char **line)
 	int				n;
 	int				flag;
 
-	if ((read(fd, buffer, 0) < 0) || fd == 0 || !line || BUFFER_SIZE < 1)
+	if ((read(fd, buffer, 0) < 0) || fd < 0 || !line || BUFFER_SIZE < 1)
 		return (-1);
 	while ((n = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
